@@ -1,0 +1,58 @@
+
+<form (ngSubmit)="onSubmit(registrationForm)" #registrationForm="ngForm" class="w-1/2 m-auto mt-12 px-10 py-6 border border-blue-500 rounded-lg mb-6">
+
+    <h3 class="text-blue-500 font-bold text-2xl text-center mb-6">User Registration Form</h3>
+
+    <div class="relative z-0 w-full mb-6 group">
+        <input type="text" id="name" name="name" minlength="3" required [(ngModel)]="data.name" #name="ngModel" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="" />
+        <label for="name" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Your Full Name</label>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="w-full bg-red-200 py-2 text-red-500 font-medium pl-4">
+            <div *ngIf="name.errors?.['required']">Name is required</div>
+            <div *ngIf="name.errors?.['minlength']">Name must be atleast 3 chracter</div>
+        </div>
+    </div>
+
+    <div class="relative z-0 w-full mb-6 group">
+        <input type="email" email id="email" name="email" required [(ngModel)]="data.email" #email="ngModel" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="" />
+        <label for="email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Your Email</label>
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="w-full bg-red-200 py-2 text-red-500 font-medium pl-4">
+            <div *ngIf="email.errors?.['required']">Email is required</div>
+            <div *ngIf="email.errors?.['email']">Email is Invalid</div>
+        </div>
+    </div>
+
+    <div class="relative z-0 w-full mb-6 group">
+        <input type="password" id="password" name="password" required [(ngModel)]="data.password" #password="ngModel" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label for="password" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Your Password</label>
+        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="w-full bg-red-200 py-2 text-red-500 font-medium pl-4">
+            <div *ngIf="password.errors?.['required']">Password is required</div>
+        </div>
+        <div *ngIf="passwordCheck()" class="w-full bg-red-200 py-2 text-red-500 font-medium pl-4">Password should have at least 6 character with one uppercase, one lowercase, one digit, and one special character</div>
+    </div>
+
+    <div class="relative z-0 w-full mb-6 group">
+        <input type="password" id="conpass" name="conpass" required [(ngModel)]="data.conpass" #conpass="ngModel" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " required />
+        <label for="conpass" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Your Confirm Password</label>
+        <div *ngIf="conpass.invalid && (conpass.dirty || conpass.touched)" class="w-full bg-red-200 py-2 text-red-500 font-medium pl-4">
+            <div *ngIf="conpass.errors?.['required']">Comfirm Password is required</div>
+        </div>
+        <div *ngIf="conPassCheck()" class="w-full bg-red-200 py-2 text-red-500 font-medium pl-4">Confirm Password is not matching with Password</div>
+    </div>
+
+    <div class="relative z-0 w-full mb-6 group">
+        <input type="number" id="phone" name="phone" pattern="[0-9]{10}"  required [(ngModel)]="data.phone" #phone="ngModel" class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="" />
+        <label for="phone" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Your Mobile No.</label>
+        <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="w-full bg-red-200 py-2 text-red-500 font-medium pl-4">
+            <div *ngIf="phone.errors?.['required']">Phone is required</div>
+            <div *ngIf="phone.errors?.['pattern']">Phone must be 10 digits</div>
+        </div>
+    </div>
+
+    
+
+    <button type="submit" [ngStyle]="{'background-color': registrationForm.invalid ? '#e3e3e3' : 'blue'}" [disabled]="registrationForm.invalid" class="text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full py-3 cursor-pointer text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">SUBMIT</button>
+</form>
+  
+<div *ngIf="flag" class="text-center font-medium mt-6">
+    {{data | json}}
+</div>
